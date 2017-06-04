@@ -4,7 +4,7 @@
   <meta name="description" content="{{ if .IsNode }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ else }}{{ with .Description }}{{ . }}{{ end }}{{ end }}">
   {{.Hugo.Generator}}
 
-  <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} &middot; {{ .Site.Title }}{{ end }}</title>
+  <title>{{ if .IsHome }}{{ .Title | markdownify | plainify }}{{ else }}{{ .Title | markdownify | plainify }} &middot; {{ .Site.Title }}{{ end }}</title>
 
   <!-- CSS -->
   {{ $purecss := "https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.2/" }}
@@ -34,7 +34,7 @@
 
   <!-- RSS -->
   {{ if .RSSLink }}
-  <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ .RSSLink }}" />
+  <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title | markdownify }}" href="{{ .RSSLink }}" />
   {{ end }}
 
   {{ with .Site.Params.highlightjs }}
